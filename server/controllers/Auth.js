@@ -11,6 +11,13 @@ exports.signup = async (req, res) => {
             email,
             password,
         });
+
+        if(!firstName || !lastName || !userName || !email || !password){
+            return res.status(404).json({
+                success: false,
+                message: "Please fill all details, Try again",
+            })
+        }
     
         return res.status(200).json({
             success: true,
