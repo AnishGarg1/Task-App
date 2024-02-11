@@ -12,6 +12,17 @@ exports.signup = async (req, res) => {
             password,
         });
 
+        const alreadyUser = User.find({
+            email: email
+        });
+
+        if(alreadyUser){
+            return res.status(401).json({
+                success: false,
+                message: "User already exist",
+            })
+        }
+
         if(!firstName || !lastName || !userName || !email || !password){
             return res.status(404).json({
                 success: false,
